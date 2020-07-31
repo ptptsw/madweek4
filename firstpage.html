@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+      <meta charset="utf-8" />
+      <title></title>
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+      <script type = "text/javascript" src="firstpage.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-database.js"></script>
+      <script async src="https://www.googletagmanager.com/gtag/js"></script>
+      <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  </head>
+  <body>
+
+    <link rel="stylesheet" href="firstpage.css">
+
+        <div class="login_container">
+            <h1>Join our webpage</h1>
+            <div class="form-group">
+                <label for="email">Email address:</label>
+                <input type="email" class="form-control" id="email">
+            </div>
+            <div class="form-group">
+                <label for="name">NicName:</label>
+                <input type="text" class="form-control" id="name">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password</label>
+                <input type="password" class="form-control" id="pwd">
+            </div>
+            <button type="button" class="btn btn-default join" id="join">가입</button>
+            <button type="button" class="btn btn-default google_login" id="google_login">구글로 로그인 하기</button>
+
+        </div>
+
+  </body>
+</html>
