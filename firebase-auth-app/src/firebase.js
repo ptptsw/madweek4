@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import { functions } from "firebase";
+import { navigate } from "@reach/router";
 
 const firebaseConfig={
     apiKey: "AIzaSyAQgCk9JBG5h_xJ2Zaoa7UrxOL3EQmo808",
@@ -19,7 +20,7 @@ export const auth=firebase.auth();
 export const firestore=firebase.firestore();
 const provider=new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle=()=>{
-    auth.signInWithPopup(provider);
+    auth.signInWithPopup(provider).then(()=>{navigate("calendar");});
 };
 
 export const generateUserDocument = async (user, additionalData) => {

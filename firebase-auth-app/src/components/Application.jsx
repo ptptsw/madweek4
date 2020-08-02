@@ -6,6 +6,7 @@ import UserProvider from "../providers/UserProvider";
 import ProfilePage from "./ProfilePage";
 import { UserContext } from "../providers/UserProvider";
 import PasswordReset from "./PasswordReset";
+import Calendar from "./CalendarView"
 
 function Application(){
     const user = useContext(UserContext);
@@ -14,9 +15,10 @@ function Application(){
         <ProfilePage />
         :
         <Router>
-            <SignUp path="signUp" />
+            <SignUp path="signUp"/>
             <SignIn path = "/" />
-            <PasswordReset path= "passwordReset" />
+            <PasswordReset path= "passwordReset"/>
+            <Calendar path="calendar"/>
         </Router>
     );
 }
