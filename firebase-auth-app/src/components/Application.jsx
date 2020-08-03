@@ -13,13 +13,12 @@ function Application(){
     const user = useContext(UserContext);
     return (
         user ?
-        <ProfilePage />
+        <MyCalendar path="calendar" />
         :
         <Router>
             <SignUp path="signUp"/>
             <SignIn path = "/" />
             <PasswordReset path= "passwordReset"/>
-            <MyCalendar path="calendar"/>
         </Router>
     );
 }

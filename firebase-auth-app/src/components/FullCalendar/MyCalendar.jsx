@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import LoginState from '../ProfilePage';
+import GroupCard from '../Group/GroupCard'
+import FriendsCard from '../Friends/FriendsCard'
 
 class MyCalendar extends React.Component {
     constructor(props){
@@ -9,6 +12,9 @@ class MyCalendar extends React.Component {
     render(){
         return(
             <div className = 'mypage-body'>
+                <LoginState/>
+                <FriendsCard/>
+                <GroupCard/>
                 <div className = 'body-wrapper box'>
                     <div className = 'body-info-container'>
                         <div className = 'Month'>

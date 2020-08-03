@@ -5,7 +5,7 @@ import {auth} from "../firebase";
 
 const ProfilePage = () => {
     const user=useContext(UserContext);
-    const {photoURL, displayName,email}= user;
+    const {displayName,email}= user;
     console.log(user);
   return (
     <div className = "mx-auto w-11/12 md:w-2/4 py-8 px-4 md:px-8">
@@ -25,7 +25,7 @@ const ProfilePage = () => {
         <h3 className = "italic">{email}</h3>
         </div>
       </div>
-      <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut()}}>Sign out</button>
+      <button className = "w-full py-3 bg-red-600 mt-4 text-white" onClick = {() => {auth.signOut().then(()=>{navigate("/");})}}>Sign out</button>
     </div>
   ) 
 };
