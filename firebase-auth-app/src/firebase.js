@@ -56,3 +56,5 @@ export const generateUserDocument = async (user, additionalData) => {
       console.error("Error fetching user", error);
     }
   };
+
+  

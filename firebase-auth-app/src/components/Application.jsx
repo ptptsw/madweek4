@@ -13,7 +13,7 @@ function Application(){
     const user = useContext(UserContext);
     return (
         user ?
-        <MyCalendar path="calendar" />
+        <MyCalendar path="calendar" value={user} />
         :
         <Router>
             <SignUp path="signUp"/>
