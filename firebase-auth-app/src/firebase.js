@@ -56,3 +56,48 @@ export const generateUserDocument = async (user, additionalData) => {
       console.error("Error fetching user", error);
     }
   };
+
+
+  //  const FindFriendUID= async friendemail=>{
+  //    console.log(friendemail);
+  //    var query= firestore.collection('users').where("email", "==", friendemail);
+  //     await query.get().then(function(querySnapshot){
+  //     querySnapshot.forEach(function(doc){
+  //       return doc.id;
+  //       });
+  //     });
+  //    return null;
+  //  };
+
+   function FindFriendUID(friendemail){
+     return new Promise(function(resolve,reject){
+       var query=firestore.collection('users').where("email", "==", friendemail);
+       query.get().then(function(querySnapshot){
+         querySnapshot.forEach(function(doc){
+           resolve(doc.id);
+         });
+       });
+     });
+   }
+
+
+
+  export const AddFriendstoFirebase= async(event, user, friendemail) =>{
+      if(!user){
+        console.log("hihi2");
+        return;
+      } 
+      const userRef = firestore.doc(`users/${user.uid}`);
+      console.log(user.uid);
+      //console.log(friendemail);
+      FindFriendUID(friendemail).then(function(v) {
+        var uid=String(v);
+        console.log(uid);
+        userRef.set({
+          FriendsList:{
+            [uid] : {friendemail}
+          }
+        },{merge:true});
+      })
+      
+  }

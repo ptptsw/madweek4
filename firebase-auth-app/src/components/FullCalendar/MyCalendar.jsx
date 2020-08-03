@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import LoginState from '../ProfilePage';
 import GroupCard from '../Group/GroupCard'
 import FriendsCard from '../Friends/FriendsCard'
+import FriendsAdd from '../Friends/FriendsAdd'
 
 class MyCalendar extends React.Component {
     constructor(props){
@@ -13,6 +14,7 @@ class MyCalendar extends React.Component {
         return(
             <div className = 'mypage-body'>
                 <LoginState/>
+                <FriendsAdd/>
                 <FriendsCard/>
                 <GroupCard/>
                 <div className = 'body-wrapper box'>
