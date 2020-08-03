@@ -57,4 +57,12 @@ export const generateUserDocument = async (user, additionalData) => {
     }
   };
 
-  
+  const newSchedule = async (user, schedule) => {
+    if( !getUserDocument(user.uid)) return null;
+    try {
+      await firestore.doc(`users/${user.uid}/shedule`).add(schedule);
+      alert(`일정이 추가되었습니다`);
+    } catch(error){
+      console.error("Error adding schedule", error);
+    }
+  }
