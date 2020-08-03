@@ -3,10 +3,11 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import LoginState from '../ProfilePage';
 import GroupCard from '../Group/GroupCard'
-import FriendsCard from '../Friends/FriendsCard'
 import { UserContext } from '../../providers/UserProvider';
 import Addschedule from './AddSchedule'
 import '../../firebase'
+import FriendsCard from '../Friends/FriendsCard'
+import FriendsAdd from '../Friends/FriendsAdd'
 
 function MyCalendar(){
     const user = useContext(UserContext);
@@ -17,6 +18,7 @@ function MyCalendar(){
         return(
             <div className = 'mypage-body'>
                 <LoginState/>
+                <FriendsAdd/>
                 <FriendsCard/>
                 <GroupCard/>
                 <div className = 'body-wrapper box'>
