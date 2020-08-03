@@ -58,29 +58,25 @@ export const generateUserDocument = async (user, additionalData) => {
   };
 
 
-  //  const FindFriendUID= async friendemail=>{
-  //    console.log(friendemail);
-  //    var query= firestore.collection('users').where("email", "==", friendemail);
-  //     await query.get().then(function(querySnapshot){
-  //     querySnapshot.forEach(function(doc){
-  //       return doc.id;
-  //       });
-  //     });
-  //    return null;
-  //  };
-
    function FindFriendUID(friendemail){
      return new Promise(function(resolve,reject){
        var query=firestore.collection('users').where("email", "==", friendemail);
        query.get().then(function(querySnapshot){
          querySnapshot.forEach(function(doc){
-           resolve(doc.id);
+           console.log(doc.data().displayName);
+           resolve(doc);
          });
        });
      });
    }
 
-
+  export const AddGroupFirebase= async(event,user,groupname, names)=>{
+    const userRef=firestore.collection(`GroupList`).doc();
+    console.log("group"+user.uid);
+    userRef.set({
+        [groupname]:{names}
+    },{merge:true});
+  }
 
   export const AddFriendstoFirebase= async(event, user, friendemail) =>{
       if(!user){
@@ -91,11 +87,12 @@ export const generateUserDocument = async (user, additionalData) => {
       console.log(user.uid);
       //console.log(friendemail);
       FindFriendUID(friendemail).then(function(v) {
-        var uid=String(v);
+        var uid=String(v.id);
+        var displayname = v.data().displayName;
         console.log(uid);
         userRef.set({
           FriendsList:{
-            [uid] : {friendemail}
+            [uid] : {friendemail, displayname}
           }
         },{merge:true});
       })

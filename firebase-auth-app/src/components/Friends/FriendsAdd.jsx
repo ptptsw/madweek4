@@ -17,13 +17,7 @@ const AddFriends = () => {
 
     };
 
-    // const handleClick=()=>{
-    //     console.log("hihi");
-    //     try{
 
-    //     }
-    // };
-    
     return(
         <div>
         <form>

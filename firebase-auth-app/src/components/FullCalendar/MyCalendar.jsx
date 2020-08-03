@@ -4,10 +4,11 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import LoginState from '../ProfilePage';
 import GroupCard from '../Group/GroupCard'
 import { UserContext } from '../../providers/UserProvider';
-import Addschedule from './AddSchedule'
-import '../../firebase'
-import FriendsCard from '../Friends/FriendsCard'
-import FriendsAdd from '../Friends/FriendsAdd'
+import Addschedule from './AddSchedule';
+import '../../firebase';
+import FriendsCard from '../Friends/FriendsCard';
+import FriendsAdd from '../Friends/FriendsAdd';
+import GroupdAdd from "../Group/GroupAdd";
 
 function MyCalendar(){
     const user = useContext(UserContext);
@@ -20,6 +21,7 @@ function MyCalendar(){
                 <LoginState/>
                 <FriendsAdd/>
                 <FriendsCard/>
+                <GroupdAdd/>
                 <GroupCard/>
                 <div className = 'body-wrapper box'>
                     <div className = 'body-info-container'>
