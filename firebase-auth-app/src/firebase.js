@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import 'firebase/database';
 import { functions } from "firebase";
 import { navigate } from "@reach/router";
 
@@ -18,6 +19,7 @@ const firebaseConfig={
 firebase.initializeApp(firebaseConfig);
 export const auth=firebase.auth();
 export const firestore=firebase.firestore();
+//export const firedatabase=firebase.database();
 const provider=new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle=()=>{
     auth.signInWithPopup(provider).then(()=>{navigate("calendar");});
@@ -28,12 +30,11 @@ export const generateUserDocument = async (user, additionalData) => {
     const userRef = firestore.doc(`users/${user.uid}`);
     const snapshot = await userRef.get();
     if (!snapshot.exists) {
-      const { email, displayName, photoURL } = user;
+      const { email, displayName} = user;
       try {
         await userRef.set({
           displayName,
           email,
-          photoURL,
           ...additionalData
         });
       } catch (error) {
