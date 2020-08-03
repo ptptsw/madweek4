@@ -7,6 +7,7 @@ import ProfilePage from "./ProfilePage";
 import { UserContext } from "../providers/UserProvider";
 import PasswordReset from "./PasswordReset";
 import Calendar from "./CalendarView"
+import MyCalendar from "./FullCalendar/MyCalendar"
 
 function Application(){
     const user = useContext(UserContext);
@@ -18,7 +19,7 @@ function Application(){
             <SignUp path="signUp"/>
             <SignIn path = "/" />
             <PasswordReset path= "passwordReset"/>
-            <Calendar path="calendar"/>
+            <MyCalendar path="calendar"/>
         </Router>
     );
 }
