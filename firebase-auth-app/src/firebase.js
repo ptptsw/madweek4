@@ -136,20 +136,22 @@ export const generateUserDocument = async (user, additionalData) => {
       })
     }
 
-    export const addSchedule = async (user, title,date) => {
+    export const addSchedule = async (user, title,start_date,start_time,end_date, end_time) => {
       if(!user){
         console.log("hihi2");
         return;
       } 
       try {
         // await firestore.doc(`users/${user.uid}/shedule`).add(schedule);
-        const userRef = firestore.doc(`users/${user.uid}`);
+        const userRef = firestore.doc(`users/${user.uid}`).collection(`schedule`);
+
         console.log("checking" + userRef);
-        userRef.set({
-          Shedule:{
-            shedule : {title, date}
-          }
-        },{merge: true});
+        userRef.add({
+          title: title,
+          start: start_date+`T`+start_time,
+          end : end_date+ `T` +end_time
+        })
+
         alert(`일정이 추가되었습니다`);
       } catch(error){
         console.error("Error adding schedule", error);
