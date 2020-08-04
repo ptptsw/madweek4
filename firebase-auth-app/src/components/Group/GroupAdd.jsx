@@ -7,10 +7,10 @@ import "firebase/firestore";
 const AddGroup= () => {
     const user=useContext(UserContext);
 
-    const [names, setNames]=useState([]);
+    const [names, setNames]=useState([{id:0, email:user.email}]);
     const[inputText, setInputText]=useState('');
     const[groupname, setGroupName]=useState('');
-    const [nextID, setNextID]=useState(0);
+    const [nextID, setNextID]=useState(1);
     
     const onChange =e=>{
         const{name,value}=e.currentTarget;
@@ -26,7 +26,7 @@ const AddGroup= () => {
     const onClick=()=>{
         const nextNames=names.concat({
             id:nextID,
-            text:inputText
+            email:inputText
         });
         console.log(names);
         setNextID(nextID+1);
@@ -34,8 +34,12 @@ const AddGroup= () => {
         setInputText('');
     };
 
+    const arrayToMap=names=>{
+
+    }
+
     
-    const nameList=names.map(name=><li key={name.id}>{name.text}</li>)
+    const nameList=names.map(name=><li key={name.id}>{name.email}</li>)
     return(
         <Card>
             <input name="groupname" value={groupname} onChange={onChange}/>

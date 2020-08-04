@@ -4,6 +4,7 @@ import "firebase/firestore";
 import 'firebase/database';
 import { functions } from "firebase";
 import { navigate } from "@reach/router";
+import { List } from "semantic-ui-react";
 
 const firebaseConfig={
     apiKey: "AIzaSyAQgCk9JBG5h_xJ2Zaoa7UrxOL3EQmo808",
@@ -28,6 +29,7 @@ export const signInWithGoogle=()=>{
 export const generateUserDocument = async (user, additionalData) => {
     if (!user) return;
     const userRef = firestore.doc(`users/${user.uid}`);
+    const MapEmailAndUser=firestore.collection('UserAndEmail').doc('map');
     const snapshot = await userRef.get();
     if (!snapshot.exists) {
       const { email, displayName} = user;
@@ -37,6 +39,11 @@ export const generateUserDocument = async (user, additionalData) => {
           email,
           ...additionalData
         });
+        await MapEmailAndUser.set({
+          map:{
+            [email]:user.uid
+          }
+        },{merge:true});
       } catch (error) {
         console.error("Error creating user document", error);
       }
@@ -57,7 +64,8 @@ export const generateUserDocument = async (user, additionalData) => {
     }
   };
 
-
+  //friends list 에 있는 email에 해당하는 doc 반환, AddFriendsFirebase에 사용
+  //uid 사용하면 doc.id, data 사용하려면 doc.data().email
    function FindFriendUID(friendemail){
      return new Promise(function(resolve,reject){
        var query=firestore.collection('users').where("email", "==", friendemail);
@@ -73,9 +81,39 @@ export const generateUserDocument = async (user, additionalData) => {
   export const AddGroupFirebase= async(event,user,groupname, names)=>{
     const userRef=firestore.collection(`GroupList`).doc();
     console.log("group"+user.uid);
-    userRef.set({
-        [groupname]:{names}
-    },{merge:true});
+    userRef.set(
+      {groupname :groupname,members:names}
+    ,{merge:true});
+    AddGroupToUsers(user,groupname)
+  }
+
+  function FindGroupUID(groupname){
+    return new Promise(function(resolve,reject){
+      var query=firestore.collection('GroupList').where("groupname","==", groupname);
+      query.get().then(function(querySnapshot){
+        querySnapshot.forEach(function(doc){
+          console.log(doc.data());
+          resolve(doc);
+        });
+      });
+    });
+  }
+
+  const AddGroupToUsers=async(user,groupname)=>{
+      FindGroupUID(groupname).then(function(v){
+        var GroupUid=v.id;
+        var Members=v.data().members;
+        //console.log(v.id);
+        var ListOfMembers=[];
+        for (var i=0; i<Members.length; i++){
+          ListOfMembers.push(Members[i].email);
+        }
+        console.log(ListOfMembers); //멤버의 email 주소만 저장
+        firestore.collection('users/')
+        for (var i=0; i<ListOfMembers.length;i++){
+          firestore.collection('UserAndEmail').where()
+        }
+      });
   }
 
   export const AddFriendstoFirebase= async(event, user, friendemail) =>{
