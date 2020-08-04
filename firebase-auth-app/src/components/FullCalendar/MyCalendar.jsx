@@ -25,7 +25,7 @@ function MyCalendar(){
                 <GroupCard/>
                 <div className = 'body-wrapper box'>
                     <div className = 'body-info-container'>
-                        <Addschedule></Addschedule>
+                        <Addschedule value={user}></Addschedule>
                         <div className = 'Month'>
                             <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]}
                             events={user.calendar} />
