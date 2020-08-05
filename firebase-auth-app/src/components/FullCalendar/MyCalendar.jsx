@@ -60,10 +60,10 @@ function MyCalendar(){
     return(
                 <div className = 'mypage-body'>
                     <LoginState/>
-                    <FriendsAdd/>
+                    {/* <FriendsAdd/>
                     <FriendsCard/>
                     <GroupdAdd/>
-                    <GroupCard/>
+                    <GroupCard/> */}
                     <div className = 'body-wrapper box'>
                         <div className = 'body-info-container'>
                             <Addschedule value={user}></Addschedule>

@@ -210,7 +210,7 @@ export const generateUserDocument = async (user, additionalData) => {
 
       if (!uid) return null;
       try {
-        const userDocument =  await firestore.doc(`users/${uid}`).collection(`schedule`).get().then(function(querySnapshot){
+        const userDocument =  await firestore.doc(`users/${uid}`).collection(`events`).get().then(function(querySnapshot){
           querySnapshot.forEach(function(doc){
             var data = new Object();
             data.title = doc.data().title;
