@@ -5,38 +5,30 @@ import { UserContext } from '../../providers/UserProvider';
 
 
 
+// function HandlerGroupList(user, setEvent){
+//   GetGroupList(user).then(function(v){
+//     setEvent(v);
+// });
+// };
+
+// function HandlerGroup(groups,names,SetGroups){
+//   console.log(names);
+//   for (var i=0;i<names.length; i++){
+//     FindGroupUID(names[i]).then(function(u){
+//       console.log(groups.length);
+//       if(groups.length<names.length){
+//         //groups.push(u.data());
+//         console.log(u.data());
+//         const nextgroups=groups.concat(u.data());
+//         SetGroups(nextgroups);
+//       }
+
+      
+//     });
+//   };
+// }
 
 
-const header= ["MT group"]
-
-const description=[
-    "this is a group"
-].join(' ')
-
-const number_of_friends=[
-    5
-]
-
-const items = [
-    {
-      header: 'Project Report - April',
-      description:
-        'Leverage agile frameworks to provide a robust synopsis for high level overviews.',
-      meta: 'ROI: 30%',
-    },
-    {
-      header: 'Project Report - May',
-      description:
-        'Bring to the table win-win survival strategies to ensure proactive domination.',
-      meta: 'ROI: 34%',
-    },
-    {
-      header: 'Project Report - June',
-      description:
-        'Capitalise on low hanging fruit to identify a ballpark value added activity to beta test.',
-      meta: 'ROI: 27%',
-    },
-  ]
   
 const CardExampleGroupProps= () => {
   const user=useContext(UserContext);
@@ -44,38 +36,39 @@ const CardExampleGroupProps= () => {
   const [groups, SetGroups]=useState([]);
   const[detail_groups, Set_detail_groups]=useState([]);
 
+  // if(names.length==0){
+  //   HandlerGroupList(user,setNames);
+  //   console.log(names);
+  // }else{
+    
+  // }
+
+
   GetGroupList(user).then(function(v){
-    //console.log(v);
     if(names){
       setNames(v);
-      // for(var i=0; i<v.length; i++){
-      //   FindGroupUID(v[i]).then(function(u){
-      //     console.log(u.data());
-      //   });
-      // };
     }
+     
   });
 
-
-
   const Groups=()=>{
-    console.log(names);
+    
+      console.log(names);
       for (var i=0;i<names.length; i++){
           FindGroupUID(names[i]).then(function(u){
             if(groups.length<names.length){
               groups.push(u.data());
             }
-              console.log(u.data());
+              //console.log(u.data());
           });
         };
-
   }
 
   const Check=()=>{
     console.log(groups);
 
     for (var i=0; i<groups.length; i++){
-      console.log(groups[i]);
+      //console.log(groups[i]);
       var list=[];
       for (var j=0; j<groups[i].members.length; j++){
         list.push(groups[i].members[j].email.toString());
@@ -85,17 +78,22 @@ const CardExampleGroupProps= () => {
         members: list,
         numbers: groups[i].members.length
       });
+      
     }
+    //console.log(detail_groups);
+    // const groupList=detail_groups.map(name=>
+    //   <Card>
+    //   <Card.Content header={name.id}/>
+    //   {name.members.map(person=><Card.Content description={person} /> )}
+    //   <Card.Content extra>
+    //     <Icon name='user'/>{name.numbers} Friends
+    //   </Card.Content>
+    // </Card>
+    // )
   };
 
 
-  
-
-
-  //const {MyGroup}=user;
-  //console.log({MyGroup});
-  //var sample=GetDetailOfGroup(user);
-  //console.log(sample);
+  //console.log(detail_groups);
   const groupList=detail_groups.map(name=>
     <Card>
     <Card.Content header={name.id}/>

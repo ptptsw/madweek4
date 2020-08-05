@@ -1,5 +1,5 @@
 import React, {useContext, useState,Component,createContext} from "react";
-import {Button} from 'semantic-ui-react';
+import {Button, Card, Popup} from 'semantic-ui-react';
 import { auth, AddFriendstoFirebase } from "../../firebase";
 import { UserContext } from "../../providers/UserProvider";
 import "firebase/firestore";
@@ -15,21 +15,27 @@ const AddFriends = () => {
         event.preventDefault();
     };
     return(
-        <div>
+        <>
+        
+        <Card>
         <form>
+            <label>Friends Email:</label>
             <input
                 type="email"
+                className="mt-1 mb-3 p-1 w-full"
                 placeholder="Enter friendsEmail"
                 value={friendemail}
                 onChange={({target : {value}})=>setEmail(value)}
             />
         </form>
-        <button onClick={event=>{
+        <Button color="green" onClick={event=>{
             AddFriendstoFirebase(event,user,friendemail);
         }}>
                 Add Friends
-        </button>
-        </div>
+        </Button>
+        </Card>
+        
+        </>
     )
-}
+};
 export default AddFriends;
