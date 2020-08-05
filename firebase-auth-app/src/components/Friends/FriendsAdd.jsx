@@ -11,12 +11,9 @@ const AddFriends = () => {
     const user=useContext(UserContext);
     const [friendemail,setEmail] = useState('');
     const [error, setError] = useState(null);
-
     const AddFriendsHandler=(event, friendemail) =>{
         event.preventDefault();
     };
-
-
     return(
         <div>
         <form>
@@ -33,9 +30,6 @@ const AddFriends = () => {
                 Add Friends
         </button>
         </div>
-        
-        
     )
 }
-
 export default AddFriends;
