@@ -66,7 +66,7 @@ export const generateUserDocument = async (user, additionalData) => {
 
   //friends list 에 있는 email에 해당하는 doc 반환, AddFriendsFirebase에 사용
   //uid 사용하면 doc.id, data 사용하려면 doc.data().email
-   function FindFriendUID(friendemail){
+   export function FindFriendUID(friendemail){
      return new Promise(function(resolve,reject){
        var query=firestore.collection('users').where("email", "==", friendemail);
        query.get().then(function(querySnapshot){
@@ -87,12 +87,12 @@ export const generateUserDocument = async (user, additionalData) => {
     AddGroupToUsers(user,groupname)
   }
 
-  function FindGroupUID(groupname){
+  export function FindGroupUID(groupname){
     return new Promise(function(resolve,reject){
       var query=firestore.collection('GroupList').where("groupname","==", groupname);
       query.get().then(function(querySnapshot){
         querySnapshot.forEach(function(doc){
-          console.log(doc.data());
+          //console.log(doc.data());
           resolve(doc);
         });
       });
@@ -111,7 +111,14 @@ export const generateUserDocument = async (user, additionalData) => {
         console.log(ListOfMembers); //멤버의 email 주소만 저장
         firestore.collection('users/')
         for (var i=0; i<ListOfMembers.length;i++){
-          firestore.collection('UserAndEmail').where()
+           FindFriendUID(ListOfMembers[i]).then(function(u){
+            var uid=u.id;
+            firestore.doc(`users/${uid}`).set({
+              MyGroup:{
+                [groupname]: GroupUid
+              }
+            },{merge:true});
+          })
         }
       });
   }
@@ -130,7 +137,7 @@ export const generateUserDocument = async (user, additionalData) => {
         console.log(uid);
         userRef.set({
           FriendsList:{
-            [uid] : {friendemail, displayname}
+            [friendemail] : {uid}
           }
         },{merge:true});
       })
@@ -157,4 +164,42 @@ export const generateUserDocument = async (user, additionalData) => {
         console.error("Error adding schedule", error);
       }
     }
+
+
+  export const GetFriendsList=async(user)=>{
+    return new Promise(function(resolve, reject){
+      firestore.doc(`users/${user.uid}`).onSnapshot(function(doc){
+        var map=doc.data().FriendsList;
+        var current =Object.keys(map);
+        resolve(current);
+      });
+    });
+  }
+
+  export function GetGroupList(user){
+    return new Promise(function(resolve,reject){
+      firestore.doc(`users/${user.uid}`).onSnapshot(function(doc){
+        var map=doc.data().MyGroup;
+        var GroupName=Object.keys(map);
+        //console.log(GroupName);
+        resolve(GroupName);
+      })
+    });
+  }
+
+  export const GetDetailOfGroup=async(user)=>{
+    GetGroupList(user).then(function(v){
+      console.log(v);
+      var sample=[];
+      for (var i=0; i<v.length; i++){
+        FindGroupUID(v[i]).then(function(u){
+          //console.log(u.data());
+          sample.push(u.data().groupname);
+        });
+      };
+      return sample;
+    });
+    
+  }
         
+

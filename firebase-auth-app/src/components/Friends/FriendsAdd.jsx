@@ -13,7 +13,6 @@ const AddFriends = () => {
     const [error, setError] = useState(null);
     const AddFriendsHandler=(event, friendemail) =>{
         event.preventDefault();
-
     };
     return(
         <div>

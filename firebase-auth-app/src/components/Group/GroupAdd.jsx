@@ -1,5 +1,5 @@
 import React, {useContext, useState, Component, createContext} from "react";
-import {Button, Card} from 'semantic-ui-react';
+import {Button, Card, Segment} from 'semantic-ui-react';
 import {auth, AddGroupFirebase} from "../../firebase";
 import {UserContext} from "../../providers/UserProvider";
 import "firebase/firestore";
@@ -28,6 +28,7 @@ const AddGroup= () => {
             id:nextID,
             email:inputText
         });
+        
         console.log(names);
         setNextID(nextID+1);
         setNames(nextNames);
@@ -42,11 +43,14 @@ const AddGroup= () => {
     const nameList=names.map(name=><li key={name.id}>{name.email}</li>)
     return(
         <Card>
-            <input name="groupname" value={groupname} onChange={onChange}/>
-            <input name="friendslist" value={inputText} onChange={onChange}/>
-            <button onClick={onClick}>추가</button>
+            <label className="block">GroupName:</label>
+            <input name="groupname" value={groupname} className="mt-1 mb-3 p-1 w-full" placeholder="Add Group Name" onChange={onChange}/>
+            <label className="block" >Add Members:</label>
+            <input name="friendslist" value={inputText} className="mt-1 mb-3 p-1 w-full"  placeholder="Members Email" onChange={onChange}/>
+            <button className="bg-gray-700 hover:bg-gray-800 w-full py-2 text-white" onClick={onClick}>추가</button>
+            <label className="block">Group Members List:</label>
             <ul>{nameList}</ul>
-            <Button onClick={event=>{
+            <Button color="green" onClick={event=>{
                 AddGroupFirebase(event,user, groupname, names);
             }}>
             Add Group
