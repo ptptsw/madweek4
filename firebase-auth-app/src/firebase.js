@@ -136,14 +136,14 @@ export const generateUserDocument = async (user, additionalData) => {
       })
     }
 
-    export const addSchedule = async (user, title,start_date,start_time,end_date, end_time) => {
+  export const addSchedule = async (user, title,start_date,start_time,end_date, end_time) => {
       if(!user){
         console.log("hihi2");
         return;
       } 
       try {
         // await firestore.doc(`users/${user.uid}/shedule`).add(schedule);
-        const userRef = firestore.doc(`users/${user.uid}`).collection(`schedule`);
+        const userRef = firestore.doc(`users/${user.uid}`).collection(`events`);
 
         console.log("checking" + userRef);
         userRef.add({
@@ -157,4 +157,32 @@ export const generateUserDocument = async (user, additionalData) => {
         console.error("Error adding schedule", error);
       }
     }
-        
+
+    export const getSchedule = async uid => {
+      const result = new Array();
+      var jsonData;
+      var json = new Object();
+
+      if (!uid) return null;
+      try {
+        const userDocument =  await firestore.doc(`users/${uid}`).collection(`schedule`).get().then(function(querySnapshot){
+          querySnapshot.forEach(function(doc){
+            var data = new Object();
+            data.title = doc.data().title;
+            data.start = doc.data().start;
+            data.end = doc.data().end;
+            console.log(doc.id ," =>",doc.data().title);
+            result.push(data);
+          })
+          json.events = result;
+          jsonData = JSON.stringify(json);
+          console.log(json);
+          console.log(jsonData);
+        });
+        return {
+          json
+        };
+      } catch (error) {
+        console.error("Error fetching user", error);
+      }
+    };
