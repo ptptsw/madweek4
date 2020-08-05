@@ -14,7 +14,6 @@ const AddFriends = () => {
 
     const AddFriendsHandler=(event, friendemail) =>{
         event.preventDefault();
-
     };
 
 
