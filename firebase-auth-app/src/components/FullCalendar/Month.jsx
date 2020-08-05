@@ -1,15 +1,13 @@
 import React, {Component, useContext, useState} from 'react'
+import {Calendar} from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid'
 import LoginState from '../ProfilePage';
 import GroupCard from '../Group/GroupCard'
 import { UserContext } from '../../providers/UserProvider';
-import Addschedule from './AddSchedule';
 import '../../firebase';
-import FriendsCard from '../Friends/FriendsCard';
-import FriendsAdd from '../Friends/FriendsAdd';
-import GroupdAdd from "../Group/GroupAdd";
-import {getSchedule} from '../../firebase';
+import {getSchedule, FindGroupUID, generateUserDocument} from '../../firebase';
 
 var check = 0;
 
@@ -18,12 +16,23 @@ function getEvents(user,setEvent){
         function(data){
             try{
                 setEvent(data);
-                console.log("testing");
-                console.log("testing",JSON.parse(data));
             }catch(error){
                 console.error("Error",error);
             }
     });
+}
+
+function getGroupMonth(user){
+    FindGroupUID("dfl").then(
+        function(data){
+            try{
+                console.log("testing18",data.data());
+                console.log("testing19",generateUserDocument(user,));
+            }catch(error){
+                console.error("Error",error);
+            }
+        }
+    )
 }
 
 function Month(){
@@ -38,17 +47,20 @@ function Month(){
         console.log("test1234",events);
         console.log("test12345",events.json.events[0]);
         events = events.json;
-
     }
+
+    getGroupMonth(user);
     
     return (
-        <div className = 'body'>
-            <div className = 'Month'>
-                <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events}
-                />
+        <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' styles = {{flex:1, flexDirection:'row'}}>
+            <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
+                <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events} styles = {{flex:1, flexDirection:'row'}}></FullCalendar>
             </div>
-            <div className = 'week-wrapper'>
-                <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events = {events}/>
+            <div className = 'week-wrapper max-w-4xl'>
+                <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events = {events} styles = {{flex:1, flexDirection:'row'}}/>
+            </div>
+            <div className = 'week-wrapper max-w-4xl'>
+                <FullCalendar initialView = "timeGridWeek" plugins = {[timeGridPlugin]} events = {events} styles = {{flex:1, flexDirection:'row'}}/>
             </div>
         </div>)
 }
