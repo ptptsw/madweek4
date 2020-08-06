@@ -5,7 +5,22 @@ import { UserContext } from '../../providers/UserProvider';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import GroupMonth from '../FullCalendar/GroupMonth';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
+
+const responsive={
+  desktop:{
+      breakpoint:{max:3000, min:1024},
+      items:4,
+      slidesToSlide:4
+  },
+  mobile : {
+      breakpoint:{max:464, min:0},
+      items:1,
+      slidesToSlide:1
+  }
+};
   
 const CardExampleGroupProps= () => {
   const user=useContext(UserContext);
@@ -48,6 +63,7 @@ const CardExampleGroupProps= () => {
       });
     }
   };
+<<<<<<< HEAD
   const GroupView=(name)=>{
     console.log("button",name.id);
     }
@@ -62,16 +78,46 @@ const CardExampleGroupProps= () => {
       <Card.Content extra>
         <Icon name='user'/>{name.numbers} Friends
       </Card.Content>
+=======
+
+  function sample(){
+    console.log("hi");
+  }
+  
+
+  //console.log(detail_groups);
+  const groupList=detail_groups.map(name=>
+    <Card className="my-8 py-8" onClick={sample}>
+    <Card.Content header={name.id}/>
+    {name.members.map(person=><Card.Content description={person} /> )}
+    <Card.Content extra>
+      <Icon name='user'/>{name.numbers} Friends
+    </Card.Content>
+>>>>>>> 389353f5ac3af00d6433fae61cf3e76fd18368ed
     </Card>
   )
   return(
-    <>
+    <div className="py-8">
       <button onClick={Groups}>Groups</button>
       <button onClick={Check}>Check</button>
-      <Card.Group>
-      {groupList}
-      </Card.Group>
-     </>
+      <Carousel
+        swipeable={true}
+        draggable={true}
+        showDots={true}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={false}
+        autoPlaySpeed={1000}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        dotListClass="custom-dot-list-style"
+      >
+        {groupList}
+      </Carousel>
+    </div>  
   )
 }
 

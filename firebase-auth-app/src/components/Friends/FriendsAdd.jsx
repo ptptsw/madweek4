@@ -11,8 +11,14 @@ const AddFriends = () => {
     const user=useContext(UserContext);
     const [friendemail,setEmail] = useState('');
     const [error, setError] = useState(null);
-    const AddFriendsHandler=(event, friendemail) =>{
-        event.preventDefault();
+    const AddFriendsHandler=(event, user,friendemail) =>{
+        if(friendemail==''){
+            alert("Enter friendsEmail!")
+        }{
+            AddFriendstoFirebase(event, user,friendemail);
+        }
+        
+        //event.preventDefault();
     };
     return(
         <>
@@ -29,7 +35,7 @@ const AddFriends = () => {
             />
         </form>
         <Button color="green" onClick={event=>{
-            AddFriendstoFirebase(event,user,friendemail);
+            AddFriendsHandler(event,user,friendemail);
         }}>
                 Add Friends
         </Button>

@@ -170,8 +170,11 @@ export const generateUserDocument = async (user, additionalData) => {
     return new Promise(function(resolve, reject){
       firestore.doc(`users/${user.uid}`).onSnapshot(function(doc){
         var map=doc.data().FriendsList;
-        var current =Object.keys(map);
-        resolve(current);
+        if(map!=null){
+          var current =Object.keys(map);
+          resolve(current);
+        }
+        
       });
     });
   }
@@ -180,9 +183,11 @@ export const generateUserDocument = async (user, additionalData) => {
     return new Promise(function(resolve,reject){
       firestore.doc(`users/${user.uid}`).onSnapshot(function(doc){
         var map=doc.data().MyGroup;
-        var GroupName=Object.keys(map);
-        //console.log(GroupName);
-        resolve(GroupName);
+        if(map !=null){
+          var GroupName=Object.keys(map);
+          resolve(GroupName);
+        }
+        
       })
     });
   }

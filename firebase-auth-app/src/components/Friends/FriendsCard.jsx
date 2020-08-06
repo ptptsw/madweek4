@@ -5,7 +5,22 @@ import {auth, GetFriendsList,FindFriendUID} from "../../firebase";
 import { navigate } from "@reach/router";
 import {useCollection,useDocument} from 'react-firebase-hooks/firestore';
 import firebase from "firebase/app";
-import {AddFriends} from "../Friends/FriendsAdd"
+import {AddFriends} from "../Friends/FriendsAdd";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive={
+    desktop:{
+        breakpoint:{max:3000, min:1024},
+        items:4,
+        slidesToSlide:4
+    },
+    mobile : {
+        breakpoint:{max:464, min:0},
+        items:1,
+        slidesToSlide:1
+    }
+};
 
 
 function HandlerGroupList(user,setEvent){
@@ -53,11 +68,26 @@ const ListExampleHorizontal = () => {
         </ListItem>
     )
     return(
-        <div>
-        <List horizontal>
+        <Carousel 
+        swipeable={true}
+        draggable={true}
+        showDots={true}
+        responsive={responsive}
+        ssr={true} // means to render carousel on server-side.
+        infinite={false}
+        autoPlaySpeed={1000}
+        keyBoardControl={true}
+        customTransition="all .5"
+        transitionDuration={500}
+        containerClass="carousel-container"
+        removeArrowOnDeviceType={["tablet", "mobile"]}
+        dotListClass="custom-dot-list-style"
+        itemClass="carousel-item-padding-10-px"
+        >
             {emailList}
-        </List>
-        </div>
+            
+        
+        </Carousel>
     )
 };
 
