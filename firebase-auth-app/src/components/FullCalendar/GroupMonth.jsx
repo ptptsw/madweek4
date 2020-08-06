@@ -4,7 +4,6 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid'
 import LoginState from '../ProfilePage';
-import GroupCard from '../Group/GroupCard'
 import { UserContext } from '../../providers/UserProvider';
 import '../../firebase';
 import {getSchedule, FindGroupUID, generateUserDocument} from '../../firebase';
@@ -37,11 +36,12 @@ function getGroupMonth(user){
 
 function GroupMonth(){
     const user = useContext(UserContext);
-    const {displayName,email}= user;
+    const {GroupName} = this.props;
     const calendar = user.events;
     const [error, setError] = useState(null);
     var [events,setEvent]  = useState(null);
     
+    console.log("groupname",GroupName);
     
     
     if(events==null){

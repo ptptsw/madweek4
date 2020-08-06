@@ -4,12 +4,13 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import LoginState from '../ProfilePage';
 import GroupCard from '../Group/GroupCard'
 import { UserContext } from '../../providers/UserProvider';
-import Addschedule from './AddSchedule';
+import timeGridPlugin from '@fullcalendar/timegrid'
 import '../../firebase';
 import { Router } from "@reach/router";
 import {Button, Card, Icon} from 'semantic-ui-react';
 import Month from './Month';
 import {Link} from 'react-router-dom';
+import GroupMonth from './GroupMonth';
 
 
 function GetGroupSchedule(){
@@ -18,7 +19,7 @@ function GetGroupSchedule(){
     const calendar = user.events;
     const [error, setError] = useState(null);    
     const [GroupName,setGroupName] = useState('');
-    var events = new Object();
+    var [events, setEvent] = useState(null);
     console.log("test1",events);
 
 
@@ -45,9 +46,21 @@ function GetGroupSchedule(){
                     그룹 일정
             </Button>
             </Card>
-            <Router>
+                {/* <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' styles = {{flex:1, flexDirection:'row'}}>
+                    <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
+                        <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events}></FullCalendar>
+                    </div>
+                    <div className = 'week-wrapper max-w-4xl'>
+                        <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events = {events} />
+                    </div>
+                    <div className = 'week-wrapper max-w-4xl'>
+                        <FullCalendar initialView = "timeGridWeek" plugins = {[timeGridPlugin]} events = {events} />
+                    </div>
+                </div> */}
+            <Month></Month>
+            {/* <Router>
                 <Month path = '/'></Month>
-            </Router>
+            </Router> */}
         </div>
     )
 }

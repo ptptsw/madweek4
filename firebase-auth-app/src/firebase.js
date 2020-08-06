@@ -221,6 +221,7 @@ export const generateUserDocument = async (user, additionalData) => {
             data.title = doc.data().title;
             data.start = doc.data().start;
             data.end = doc.data().end;
+            data.color = doc.data().backgroundColor;
             console.log(doc.id ," =>",doc.data().title);
             result.push(data);
           })

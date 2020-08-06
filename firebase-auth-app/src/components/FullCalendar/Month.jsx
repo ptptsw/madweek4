@@ -10,80 +10,11 @@ import {getSchedule, FindGroupUID, generateUserDocument, FindFriendUID} from '..
 
 var check = 0;
 
-
-
-
-function getEvents(user,setEvent){
-    getSchedule(user.uid).then(
-        function(data){
-            try{
-                setEvent(data);
-            }catch(error){
-                console.error("Error",error);
-            }
-    });
-}
-
-async function getMembersUID(list,SetMembersUID){
-    var membersUID=[];
-    for (var i=0; i<list.length; i++){  
-        await FindFriendUID(list[i]).then(
-            function(MembersData){
-                try{
-                     membersUID.push(MembersData.id);
-                     console.log(MembersData.id);
-                }catch(error){
-                    console.error("Error", error);
-                }
-            }
-        )
-    }
-    console.log(membersUID);
-    for (var i=0; i<membersUID.length; i++){
-        console.log(membersUID[i]);
-        await getSchedule(membersUID[i]).then(
-            function(scehdule){
-                try{
-                    console.log(scehdule);
-                }catch(error){
-                    console.error("Error", error)
-                }
-            }
-        )
-    }
-    //return membersUID;
-}
-
-function getGroupMonth(user,groupname,MembersUID, SetMembersUID){
-    FindGroupUID(groupname).then(
-        function(data){
-            try{
-                var list=[];
-                var membersUID=[];
-                console.log("testing18",Object.values(data.data().members));
-                for(var i=0; i<data.data().members.length ;i++){
-                    list.push(data.data().members[i].email.toString());
-                }
-                console.log(list);
-                //members의 email 목록 받아옴
-                getMembersUID(list);
-                
-
-            }catch(error){
-                console.error("Error",error);
-            }
-        }
-    )
-}
-
-
-
-
 function Month(){
     const user = useContext(UserContext);
     const {displayName,email}= user;
     const calendar = user.events;
-    const [error, setError] = useState(null);
+    const [groupEvents, setGroupEvents] = useState([]);
     const [inputText, setInputText]=useState('');
     const [MembersUID, setMembersUID]=useState('');
     var [events,setEvent]  = useState(null);
@@ -96,6 +27,79 @@ function Month(){
     const onClick=()=>{
         console.log(inputText);
         getGroupMonth(user, inputText, MembersUID, setMembersUID);
+        
+    }
+
+    function getEvents(user,setEvent){
+        getSchedule(user.uid).then(
+            function(data){
+                try{
+                    setEvent(data);
+                }catch(error){
+                    console.error("Error",error);
+                }
+        });
+    }
+    
+    async function getMembersUID(list,SetMembersUID){
+        var GroupSchedule = [];
+        // const user = useContext(UserContext);
+        // const GroupSchedule, SetGroupSchedule] = useState('');
+        var membersUID=[];
+        for (var i=0; i<list.length; i++){  
+            await FindFriendUID(list[i]).then(
+                function(MembersData){
+                    try{
+                         membersUID.push(MembersData.id);
+                         console.log("DATA",MembersData.id);
+                    }catch(error){
+                        console.error("Error", error);
+                    }
+                }
+            )
+        }
+        
+        console.log(membersUID);
+        for (var i=0; i<membersUID.length; i++){
+            console.log(membersUID[i]);
+            await getSchedule(membersUID[i]).then(
+                function(schedule){
+                    try{
+                        console.log("group1",schedule);
+                        GroupSchedule.push(schedule.json.events);
+                        console.log("group2",GroupSchedule);                  
+                        // GroupSchedule.push(schedule.json);
+                    }catch(error){
+                        console.error("Error", error)
+                    }
+                }
+            )
+        }
+        setGroupEvents(GroupSchedule);
+        return GroupSchedule;
+        //return membersUID;
+    }
+    
+    function getGroupMonth(user,groupname,MembersUID, SetMembersUID){
+        FindGroupUID(groupname).then(
+            function(data){
+                try{
+                    var list=[];
+                    var membersUID=[];
+                    console.log("testing18",Object.values(data.data().members));
+                    for(var i=0; i<data.data().members.length ;i++){
+                        list.push(data.data().members[i].email.toString());
+                    }
+                    console.log(list);
+                    //members의 email 목록 받아옴
+                    getMembersUID(list);
+                    
+    
+                }catch(error){
+                    console.error("Error",error);
+                }
+            }
+        )
     }
 
 
@@ -114,6 +118,9 @@ function Month(){
         <input name="groupname" value={inputText} placeholder="enter groupname" onChange={onChange}/>
         <button className="bg-gray-700 hover:bg-gray-800 py-2 text-white" onClick={onClick}>Show Schedule of Groups</button>
         <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' >
+            <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
+                <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {groupEvents} ></FullCalendar>
+            </div>
             <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
                 <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events} ></FullCalendar>
             </div>
