@@ -20,12 +20,9 @@ const AddFriends = () => {
         
         //event.preventDefault();
     };
-    return(
-        <>
-        
+    return( 
         <Card>
-        <form>
-            <label>Friends Email:</label>
+            <label className="my-1 mx-1 font-bold">Friends Email:</label>
             <input
                 type="email"
                 className="mt-1 mb-3 p-1 w-full"
@@ -33,7 +30,6 @@ const AddFriends = () => {
                 value={friendemail}
                 onChange={({target : {value}})=>setEmail(value)}
             />
-        </form>
         <Button color="green" onClick={event=>{
             AddFriendsHandler(event,user,friendemail);
         }}>
@@ -41,7 +37,6 @@ const AddFriends = () => {
         </Button>
         </Card>
         
-        </>
     )
 };
 export default AddFriends;

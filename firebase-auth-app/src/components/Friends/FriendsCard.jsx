@@ -60,11 +60,9 @@ const ListExampleHorizontal = () => {
  
    
     const emailList=emails.map(name=>
-        <ListItem>
-            <Image avatar src='https://react.semantic-ui.com/images/avatar/small/tom.jpg' />
-            <ListContent>
-                <List.Header key={name.number}>{name.email}</List.Header>
-            </ListContent>
+        <ListItem style={{alignItems:'Center'}}>
+            <Image  avatar src='https://react.semantic-ui.com/images/avatar/small/tom.jpg' />
+            <List.Header key={name.number} className="font-bold">{name.email}</List.Header>
         </ListItem>
     )
     return(
@@ -83,8 +81,11 @@ const ListExampleHorizontal = () => {
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style"
         itemClass="carousel-item-padding-10-px"
+        className="py-4"
         >
-            {emailList}
+        {emailList}
+
+            
             
         
         </Carousel>

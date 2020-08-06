@@ -34,9 +34,11 @@ function MyCalendar(){
                     <FriendsListView/>
                     <GroupListView/>
                     <AddView/>
-                    <Addschedule value={user}></Addschedule>
-                    <GetGroupSchedule></GetGroupSchedule>
-                                
+                    <div className = 'body-wrapper box'>
+                        <div className = 'body-info-container'>
+                            <Month></Month>
+                        </div>
+                    </div>                   
                 </div>
     )   
 }
