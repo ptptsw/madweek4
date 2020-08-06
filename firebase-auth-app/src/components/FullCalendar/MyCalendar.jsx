@@ -6,7 +6,7 @@ import GroupCard from '../Group/GroupCard'
 import { UserContext } from '../../providers/UserProvider';
 import Addschedule from './AddSchedule';
 import '../../firebase';
-import FriendsCard from '../Friends/FriendsCard';
+import { Router } from "@reach/router";
 import FriendsAdd from '../Friends/FriendsAdd';
 import GroupdAdd from "../Group/GroupAdd";
 import {getSchedule} from '../../firebase';
@@ -14,17 +14,9 @@ import Month from './Month';
 import FriendsListView from '../FriendsListView';
 import GroupListView from '../GroupListView';
 import AddView from '../AddView';
+import GetGroupSchedule from './GetGroupSchedule';
 
 var check = 0;
-
-// function getEvents(user){
-//     getSchedule(user.uid).then(
-//         function(data){
-//             check = 1;
-//             return data;
-//     });
-
-// }
 
 function MyCalendar(){
     const user = useContext(UserContext);
