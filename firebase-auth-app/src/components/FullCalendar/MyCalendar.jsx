@@ -10,7 +10,10 @@ import FriendsCard from '../Friends/FriendsCard';
 import FriendsAdd from '../Friends/FriendsAdd';
 import GroupdAdd from "../Group/GroupAdd";
 import {getSchedule} from '../../firebase';
-import Month from './Month'
+import Month from './Month';
+import FriendsListView from '../FriendsListView';
+import GroupListView from '../GroupListView';
+import AddView from '../AddView';
 
 var check = 0;
 
@@ -60,10 +63,9 @@ function MyCalendar(){
     return(
                 <div className = 'mypage-body'>
                     <LoginState/>
-                    <FriendsAdd/>
-                    <FriendsCard/>
-                    <GroupdAdd/>
-                    <GroupCard/>
+                    <FriendsListView/>
+                    <GroupListView/>
+                    <AddView/>
                     <div className = 'body-wrapper box'>
                         <div className = 'body-info-container'>
                             <Addschedule value={user}></Addschedule>

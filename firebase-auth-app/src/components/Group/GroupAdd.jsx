@@ -35,8 +35,15 @@ const AddGroup= () => {
         setInputText('');
     };
 
-    const arrayToMap=names=>{
-
+    const AddGroupHandler=(event, user,groupname, names) =>{
+        if(groupname==''){
+            alert("Enter groupname!");
+        }else if(names.length==1){
+            alert("Enter friendsEmail!");
+        }else{
+            console.log(names);
+            AddGroupFirebase(event,user, groupname, names);
+        }
     }
 
     
@@ -51,7 +58,7 @@ const AddGroup= () => {
             <label className="block">Group Members List:</label>
             <ul>{nameList}</ul>
             <Button color="green" onClick={event=>{
-                AddGroupFirebase(event,user, groupname, names);
+                AddGroupHandler(event,user, groupname, names);
             }}>
             Add Group
             </Button>
