@@ -33,37 +33,13 @@ function MyCalendar(){
     console.log("test1",events);
     // console.
 
-
-    // return(
-    //     <div className = 'mypage-body'>
-    //         <LoginState/>
-    //         <FriendsAdd/>
-    //         <FriendsCard/>
-    //         <GroupdAdd/>
-    //         <GroupCard/>
-    //         <div className = 'body-wrapper box'>
-    //             <div className = 'body-info-container'>
-    //                 <Addschedule value={user}></Addschedule>
-    //                 <div className = 'Month'>
-    //                     <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]}
-    //                     events={events.json} />
-    //                 </div>
-    //                 <div className = 'week-wrapper'>
-    //                     <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events={events.json}/>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // )
-
-
     return(
                 <div className = 'mypage-body'>
                     <LoginState/>
-                    {/* <FriendsAdd/>
+                    <FriendsAdd/>
                     <FriendsCard/>
                     <GroupdAdd/>
-                    <GroupCard/> */}
+                    <GroupCard/>
                     <div className = 'body-wrapper box'>
                         <div className = 'body-info-container'>
                             <Addschedule value={user}></Addschedule>

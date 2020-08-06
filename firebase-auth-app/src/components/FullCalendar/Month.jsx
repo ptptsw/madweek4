@@ -52,15 +52,15 @@ function Month(){
     getGroupMonth(user);
     
     return (
-        <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' styles = {{flex:1, flexDirection:'row'}}>
+        <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' >
             <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
-                <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events} styles = {{flex:1, flexDirection:'row'}}></FullCalendar>
+                <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events} ></FullCalendar>
             </div>
             <div className = 'week-wrapper max-w-4xl'>
-                <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events = {events} styles = {{flex:1, flexDirection:'row'}}/>
+                <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events = {events} />
             </div>
             <div className = 'week-wrapper max-w-4xl'>
-                <FullCalendar initialView = "timeGridWeek" plugins = {[timeGridPlugin]} events = {events} styles = {{flex:1, flexDirection:'row'}}/>
+                <FullCalendar initialView = "timeGridWeek" plugins = {[timeGridPlugin]} events = {events} />
             </div>
         </div>)
 }
