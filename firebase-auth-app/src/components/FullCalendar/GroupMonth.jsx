@@ -35,40 +35,37 @@ function getGroupMonth(user){
     )
 }
 
-function GroupMonth(selected,SetSelected){
+function GroupMonth(){
     const user = useContext(UserContext);
-    // const {displayName,email}= user;
-    // const calendar = user.events;
-    // const [error, setError] = useState(null);
-    // var [events,setEvent]  = useState(null);
+    const {displayName,email}= user;
+    const calendar = user.events;
+    const [error, setError] = useState(null);
+    var [events,setEvent]  = useState(null);
     
-    // if(events==null){
-    //     getEvents(user,setEvent);
-    // }else{
-    //     console.log("test1234",events);
-    //     console.log("test12345",events.json.events[0]);
-    //     events = events.json;
-    // }
+    
+    
+    if(events==null){
+        getEvents(user,setEvent);
+    }else{
+        console.log("test1234",events);
+        console.log("test12345",events.json.events[0]);
+        events = events.json;
+    }
 
-    // getGroupMonth(user);
-    console.log("testtest",selected.id);
-
+    getGroupMonth(user);
+    
     return (
-        <div></div>
-    )
-    
-    // return (
-    //     <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' styles = {{flex:1, flexDirection:'row'}}>
-    //         <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
-    //             <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events}></FullCalendar>
-    //         </div>
-    //         <div className = 'week-wrapper max-w-4xl'>
-    //             <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events = {events} />
-    //         </div>
-    //         <div className = 'week-wrapper max-w-4xl'>
-    //             <FullCalendar initialView = "timeGridWeek" plugins = {[timeGridPlugin]} events = {events} />
-    //         </div>
-    //     </div>)
+        <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' styles = {{flex:1, flexDirection:'row'}}>
+            <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
+                <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events}></FullCalendar>
+            </div>
+            <div className = 'week-wrapper max-w-4xl'>
+                <FullCalendar initialView = "dayGridWeek" plugins = {[dayGridPlugin]} events = {events} />
+            </div>
+            <div className = 'week-wrapper max-w-4xl'>
+                <FullCalendar initialView = "timeGridWeek" plugins = {[timeGridPlugin]} events = {events} />
+            </div>
+        </div>)
 }
 
 export default GroupMonth;

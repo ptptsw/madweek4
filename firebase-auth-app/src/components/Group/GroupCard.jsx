@@ -63,22 +63,6 @@ const CardExampleGroupProps= () => {
       });
     }
   };
-<<<<<<< HEAD
-  const GroupView=(name)=>{
-    console.log("button",name.id);
-    }
-
-  //console.log(detail_groups);
-  const groupList=detail_groups.map(name=>
-    <Card>
-      <Card.Content header={name.id} />
-      {name.members.map(person=>
-        <Card.Content description={person}/>
-        )}
-      <Card.Content extra>
-        <Icon name='user'/>{name.numbers} Friends
-      </Card.Content>
-=======
 
   function sample(){
     console.log("hi");
@@ -93,7 +77,6 @@ const CardExampleGroupProps= () => {
     <Card.Content extra>
       <Icon name='user'/>{name.numbers} Friends
     </Card.Content>
->>>>>>> 389353f5ac3af00d6433fae61cf3e76fd18368ed
     </Card>
   )
   return(
