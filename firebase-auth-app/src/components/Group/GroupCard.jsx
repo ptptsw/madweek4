@@ -59,11 +59,12 @@ const CardExampleGroupProps= () => {
       detail_groups.push({
         id:groups[i].groupname,
         members: list,
-        numbers: groups[i].members.length
+        numbers: groups[i].members.length.members
       });
     }
   };
 
+  
   function sample(){
     console.log("hi");
   }
