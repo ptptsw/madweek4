@@ -40,14 +40,13 @@ function GetGroupSchedule(){
             </form>
             <Button color="green" onClick={event=>{
                     console.log("logg",GroupName);
-                    history.push('/grouyp')
                     // return <li><Link to = '/GroupName'></Link></li>
             }}>
                     그룹 일정
             </Button>
             </Card>
             <Router>
-                <Month path = {GroupName}></Month>
+                <Month path = '/'></Month>
             </Router>
         </div>
     )
