@@ -49,14 +49,17 @@ const AddGroup= () => {
     
     const nameList=names.map(name=><li key={name.id}>{name.email}</li>)
     return(
-        <Card>
-            <label className="block">GroupName:</label>
+        <Card className="mx-4">
+            <Card className="my-4 py-4">
+            <label className="block my-1 mx-1 font-bold">GroupName:</label>
             <input name="groupname" value={groupname} className="mt-1 mb-3 p-1 w-full" placeholder="Add Group Name" onChange={onChange}/>
-            <label className="block" >Add Members:</label>
+            <label className="block my-1 mx-1 font-bold" >Add Members:</label>
             <input name="friendslist" value={inputText} className="mt-1 mb-3 p-1 w-full"  placeholder="Members Email" onChange={onChange}/>
-            <button className="bg-gray-700 hover:bg-gray-800 w-full py-2 text-white" onClick={onClick}>추가</button>
-            <label className="block">Group Members List:</label>
-            <ul>{nameList}</ul>
+            <button className="bg-gray-700 hover:bg-gray-800 w-1xl py-2 text-white" onClick={onClick}>추가</button>
+            </Card>
+            
+            <label className="block mx-1 font-bold">Group Members List:</label>
+            <ul className="mx-1 my-1">{nameList}</ul>
             <Button color="green" onClick={event=>{
                 AddGroupHandler(event,user, groupname, names);
             }}>

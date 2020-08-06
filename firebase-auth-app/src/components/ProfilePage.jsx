@@ -4,6 +4,7 @@ import { navigate } from "@reach/router";
 import {auth} from "../firebase";
 import { Menu ,Button} from 'semantic-ui-react'
 
+
 const ProfilePage = () => {
     const user=useContext(UserContext);
     const {displayName,email}= user;
@@ -11,7 +12,7 @@ const ProfilePage = () => {
   return (
     <Menu inverted>
       <Menu.Item
-        name="Calendar"
+        name="Meet2Gether"
       />
       <Menu.Item
         name={displayName}
@@ -19,9 +20,12 @@ const ProfilePage = () => {
       <Menu.Item>
         {email}
       </Menu.Item>
-      <Menu.Item>
-        <Button color="red" onClick = {() => {auth.signOut().then(()=>{navigate("/");})}}> Sign Out </Button>
-      </Menu.Item>
+      <div >
+        <Menu.Item>
+          <Button color="red" onClick = {() => {auth.signOut().then(()=>{navigate("/");})}}> Sign Out </Button>
+        </Menu.Item>
+      </div>
+      
     </Menu>
   ) 
 };

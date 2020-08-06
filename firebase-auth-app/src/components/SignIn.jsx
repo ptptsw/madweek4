@@ -2,6 +2,7 @@ import React, {useState, createContext} from "react";
 import { Link, createHistory, createMemorySource, navigate } from "@reach/router";
 import { signInWithGoogle } from "../firebase";
 import { auth } from "../firebase";
+import background from './images/backgroundImage.png';
 
 
 const SignIn = () => {
@@ -34,11 +35,13 @@ const SignIn = () => {
    
 
   return (
-    <div className="mt-8">
-      <h1 className="text-3xl mb-2 text-center font-bold">Sign In</h1>
-      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+    <div className="w-full h-full" style={{backgroundImage: `url(${background})`, width:'2000px', height:'1000px', backgroundColor:'#00000000'}}>
+    <div>
+      <h1 className="text-6xl mb-2 text-center font-bold font-sans">Meet2Gether</h1>
+      <h1 className="text-3xl mb-2 text-center font-bold font-mono">Sign In</h1>
+      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8" style={{backgroundColor:'rgba(255,255,255,0.85)'}}>
         {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
-        <form className="">
+        <form className="" >
           <label htmlFor="userEmail" className="block">
             Email:
           </label>
@@ -87,6 +90,7 @@ const SignIn = () => {
           </Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };

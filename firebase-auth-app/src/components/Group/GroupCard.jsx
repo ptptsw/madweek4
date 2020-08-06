@@ -71,7 +71,7 @@ const CardExampleGroupProps= () => {
 
   //console.log(detail_groups);
   const groupList=detail_groups.map(name=>
-    <Card className="my-8 py-8" onClick={sample}>
+    <Card className="my-8" onClick={sample}>
     <Card.Content header={name.id}/>
     {name.members.map(person=><Card.Content description={person} /> )}
     <Card.Content extra>
@@ -80,9 +80,10 @@ const CardExampleGroupProps= () => {
     </Card>
   )
   return(
-    <div className="py-8">
-      <button onClick={Groups}>Groups</button>
-      <button onClick={Check}>Check</button>
+    <div>
+    <button onClick={Groups}>Groups</button>
+    <button onClick={Check}>Check</button>
+    <div className="font-sans">
       <Carousel
         swipeable={true}
         draggable={true}
@@ -97,10 +98,12 @@ const CardExampleGroupProps= () => {
         containerClass="carousel-container"
         removeArrowOnDeviceType={["tablet", "mobile"]}
         dotListClass="custom-dot-list-style"
+        className="my-4 py-4 px-2"
       >
         {groupList}
       </Carousel>
-    </div>  
+    </div> 
+    </div> 
   )
 }
 

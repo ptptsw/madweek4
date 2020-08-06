@@ -7,10 +7,22 @@ import LoginState from '../ProfilePage';
 import GroupCard from '../Group/GroupCard'
 import { UserContext } from '../../providers/UserProvider';
 import {getSchedule, FindGroupUID, generateUserDocument, FindFriendUID} from '../../firebase';
-
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 var check = 0;
 
-
+const responsive={
+    desktop:{
+        breakpoint:{max:3000, min:1024},
+        items:1,
+        slidesToSlide:1
+    },
+    mobile : {
+        breakpoint:{max:464, min:0},
+        items:1,
+        slidesToSlide:1
+    }
+};
 
 
 function getEvents(user,setEvent){
@@ -109,11 +121,28 @@ function Month(){
 
     //getGroupMonth(user);
     return (
-        <>
-        <label>Enter GroupName:</label>
-        <input name="groupname" value={inputText} placeholder="enter groupname" onChange={onChange}/>
-        <button className="bg-gray-700 hover:bg-gray-800 py-2 text-white" onClick={onClick}>Show Schedule of Groups</button>
-        <div className = 'body text-center py-8 px-4 md:px-8 mx-auto w-11/12' >
+        <div className="p-6 border border-black-400 mx-2 rounded py-4 px-4 my-4">
+        <p className="text-3xl font-black">Schedule</p>
+        <label className="text-1xl font-black">Enter GroupName:</label>
+        <input name="groupname" value={inputText} placeholder="enter groupname" onChange={onChange} className="mt-1 mb-3 p-1"/>
+        <button className="hover:bg-green-200 py-2 px-2 border border-gray-700 text-gray rounded" onClick={onClick}>Show Schedule of Groups</button>
+            <Carousel
+                swipeable={true}
+                draggable={true}
+                showDots={true}
+                responsive={responsive}
+                ssr={true} // means to render carousel on server-side.
+                infinite={false}
+                autoPlaySpeed={1000}
+                keyBoardControl={true}
+                customTransition="all .5"
+                transitionDuration={500}
+                containerClass="carousel-container"
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+                dotListClass="custom-dot-list-style"
+                itemClass="carousel-item-padding-10-px"
+                className=" mx-auto w-full md:w-8/12 rounded py-8 px-4 md:px-8"
+            >
             <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
                 <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {events} ></FullCalendar>
             </div>
@@ -123,8 +152,8 @@ function Month(){
             <div className = 'week-wrapper max-w-4xl'>
                 <FullCalendar initialView = "timeGridWeek" plugins = {[timeGridPlugin]} events = {events} />
             </div>
+            </Carousel>
         </div>
-        </>
         )
 }
 

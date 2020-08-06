@@ -2,6 +2,7 @@ import React, {useState, createContext, useContext} from "react";
 import { newSchedule } from "../../firebase";
 import { UserContext } from "../../providers/UserProvider";
 import { auth, signInWithGoogle, addSchedule } from "../../firebase";
+import {Button, Card, Popup} from 'semantic-ui-react';
 
 
 const AddSchedule = () => {
@@ -32,9 +33,9 @@ const AddSchedule = () => {
         }
     };
     return (
-    <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+    <Card>
         {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
-        <label htmlFor="userEmail" className="block">
+        <label htmlFor="userEmail" className="block" className="my-1 mx-1 font-bold">
             Title:
         <input
             type="email"
@@ -46,7 +47,7 @@ const AddSchedule = () => {
             onChange = {(event) => onChangeHandler(event)}
         />
         </label>
-        <label htmlFor="Date" className="block">
+        <label htmlFor="Date" className="block" className="my-1 mx-1 font-bold" >
             Date:
         <input
             type="Date"
@@ -57,7 +58,7 @@ const AddSchedule = () => {
             id="start_date"
             onChange = {(event) => onChangeHandler(event)}
         />
-                <input
+            <input
             type="time"
             className="my-1 p-1 w-full"
             name="start_time"
@@ -86,13 +87,13 @@ const AddSchedule = () => {
         />
 
         </label>
-        <button 
-            className="bg-green-400 hover:bg-green-500 w-full py-2 text-white" 
+        <Button 
+            color="green"
             onClick = {(event) =>
              {addSchedule(user, title, start_date,start_time,end_date,end_time)}}>
             일정 추가
-        </button>
-    </div>
+        </Button>
+    </Card>
     )
 }
 export default AddSchedule;

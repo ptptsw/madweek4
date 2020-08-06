@@ -44,7 +44,6 @@ function MyCalendar(){
                     <AddView/>
                     <div className = 'body-wrapper box'>
                         <div className = 'body-info-container'>
-                            <Addschedule value={user}></Addschedule>
                             <Month></Month>
                         </div>
                     </div>                   
