@@ -29,10 +29,10 @@ function Month(){
     const user = useContext(UserContext);
     const {displayName,email}= user;
     const calendar = user.events;
-    const [groupEvents, setGroupEvents] = useState([]);
+    var [groupEvents, setGroupEvents] = useState([]);
     const [inputText, setInputText]=useState('');
     const [MembersUID, setMembersUID]=useState('');
-    var [events,setEvent]  = useState(null);
+    var [events,setEvent]  = useState();
 
     const onChange=e=>{
         const{value}=e.currentTarget;
@@ -80,8 +80,11 @@ function Month(){
             await getSchedule(membersUID[i]).then(
                 function(schedule){
                     try{
+                        for(var i=0; i<schedule.json.events.length; i++){
+                            GroupSchedule.push(schedule.json.events[i]);
+                        }
                         console.log("group1",schedule);
-                        GroupSchedule.push(schedule.json.events);
+                        //GroupSchedule.push(schedule.json.events);
                         console.log("group2",GroupSchedule);                  
                         // GroupSchedule.push(schedule.json);
                     }catch(error){
@@ -90,7 +93,7 @@ function Month(){
                 }
             )
         }
-        setGroupEvents(GroupSchedule);
+        setGroupEvents({events: GroupSchedule});
         return GroupSchedule;
         //return membersUID;
     }
