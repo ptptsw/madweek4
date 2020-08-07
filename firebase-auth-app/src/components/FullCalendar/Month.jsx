@@ -151,7 +151,7 @@ function Month(){
                 removeArrowOnDeviceType={["tablet", "mobile"]}
                 dotListClass="custom-dot-list-style"
                 itemClass="carousel-item-padding-10-px"
-                className=" mx-auto w-full md:w-8/12 rounded py-8 px-4 md:px-8"
+                className=" mx-auto w-full md:w-6/12 rounded py-8 px-4 md:px-8"
             >
             <div className = 'Month max-w-4xl text-center py-8 px-4 md:px-8'>
                 <FullCalendar defaultView = "dayGridMonth" plugins = {[dayGridPlugin]} events = {groupEvents} ></FullCalendar>
